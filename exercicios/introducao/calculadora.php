@@ -9,7 +9,7 @@ define("azul","\033[34m");
 
 do{
     $validaNumeros = false;
-    $opcao = readline(verde. '1-somar \n 2- Subtrair \n 3-Multiplicar \n 4-Dividir \n 0-Sair: ');
+    $opcao = readline(verde. '1-somar \n 2- Subtrair \n 3-Multiplicar \n 4-Dividir \n 0-Sair \n Qual operação deseja realizar: ');
     while($validaNumeros == false){
         $primeiroValor = readline(vermelho. 'Informe o primeiro valor: ');
         $segundoValor = readline(azul. 'Informe o segundo valor: ');
