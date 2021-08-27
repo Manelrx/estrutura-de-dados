@@ -16,23 +16,27 @@ do{
         if($opcao == 4 and ($primeiroValor == 0 or $segundoValor == 0)){
             echo 'não é possivel subtrair por 0 \n ';
         }else{
-          $opcao = true;
+          $validaNumeros = true;
           switch($opcao){
             case 0: 
                 echo "Até a proxima";
                 $parar = false;
                 break;
             case 1:
-                echo padrao. "$primeiroValor \+ $segundoValor = $primeiroValor + $segundoValor\n";
+                $resultado = $primeiroValor + $segundoValor;
+                echo padrao. "$primeiroValor \+ $segundoValor = $resultado\n";
                 break;
             case 2:
-                echo azul. "$primeiroValor \- $segundoValor = $primeiroValor - $segundoValor \n";
+                $resultado = $primeiroValor - $segundoValor;
+                echo azul. "$primeiroValor \- $segundoValor = $resultado \n";
                 break;
             case 3: 
-                echo vermelho. "$primeiroValor vezes $segundoValor = $primeiroValor * $segundoValor \n";
+                $resultado = $primeiroValor * $segundoValor;
+                echo vermelho. "$primeiroValor vezes $segundoValor = $resultado \n";
                 break;
             case 4: 
-                echo verde. "$primeiroValor dividido $segundoValor = $primeiroValor / $segundoValor \n";
+                $resultado = $primeiroValor / $segundoValor;
+                echo verde. "$primeiroValor dividido $segundoValor = $resultado \n";
                 break;
             }       
         }
