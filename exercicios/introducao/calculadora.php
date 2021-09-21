@@ -1,45 +1,50 @@
 <?php
 
 //1) Elabore uma calculadora onde o usuário informará dois números e uma operação (+, -, *, /) e retorne o resultado da operação.
-$parar = false;
+$finalizar = false;
 define("padrao","\033[0m");
 define("vermelho","\033[31m");
 define("verde","\033[32m");
 define("azul","\033[34m");
 
 do{
-    $validaNumeros = false;
-    echo verde. "1-somar \n 2- Subtrair \n 3-Multiplicar \n 4-Dividir \n 0-Sair \n";
+    $validaDivisaoZero = false;
+    
+    $primeiroValor = readline(vermelho. "Informe o primeiro valor: ");
+    $segundoValor = readline(azul. "Informe o segundo valor: ");
+    echo verde. "[ +, -, *, /] \n";
     $opcao = readline("Qual operação deseja realizar: ");
-    while($validaNumeros == false){
-        $primeiroValor = readline(vermelho. "Informe o primeiro valor: ");
-        $segundoValor = readline(azul. "Informe o segundo valor: ");
-        if($opcao == 4 and ($primeiroValor == 0 or $segundoValor == 0)){
-            echo "não é possivel subtrair por 0 \n ";
-        }else{
-          $validaNumeros = true;
-          switch($opcao){
-            case 0: 
-                echo "Até a proxima";
-                $parar = false;
+       
+        
+    $validaDivisaoZero = true;
+        switch($opcao){
+        case '+':
+            $res = $primeiroValor + $segundoValor;
+            echo padrao."$primeiroValor + $segundoValor = $res \n";
+        break;
+        case '-': 
+            $res = $primeiroValor - $segundoValor;
+            echo azul. "$primeiroValor - $segundoValor = $res \n";
+        break;
+        case '*': 
+            $res = $primeiroValor * $segundoValor;
+            echo vermelho. "$primeiroValor vezes $segundoValor = $res \n";
+            break;
+        case '/': 
+            if($segundoValor == 0){
+                echo "não é possivel subtrair por 0 \n ";
                 break;
-            case 1:
-                echo padrao. "$primeiroValor + $segundoValor = " . $primeiroValor + $segundoValor . "\n";
-                break;
-            case 2: 
-                echo azul. "$primeiroValor - $segundoValor = " . $primeiroValor - $segundoValor . "\n";
-                break;
-            case 3: 
-                echo vermelho. "$primeiroValor vezes $segundoValor = " . $primeiroValor * $segundoValor . "\n";
-                break;
-            case 4: 
-                echo verde. "$primeiroValor dividido $segundoValor = " . $primeiroValor / $segundoValor . "\n";
-                break;
-            default:
-                echo "Essa opção não existe, favor informe novamente \n";
-            }       
+            }else{
+                $res = $primeiroValor / $segundoValor;
+                echo verde. "$primeiroValor dividido $segundoValor = $res \n";
+            break;
+            }
+        default:
+            echo "Essa opção não existe, favor informe novamente \n";
+        }   
+        $continuar = readline("Deseja continuar: s/n ");
+        if($continuar == 'n' or $continuar == 'N'){
+            $finalizar = true;
         }
-    }   
-}while($parar == false);
-
+}while($finalizar == false);
 ?>
