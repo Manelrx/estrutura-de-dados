@@ -33,8 +33,7 @@ function jogadores($player)
 function continuar()
 {
     global $continuarJogo;
-    global $tabuleiro;
-    $continuar = readline("Deseja continuar: S/N ");
+    $continuar = readline("Deseja continuar  S/N : ");
     if ($continuar == 'S' || $continuar == 's') {
         $continuarJogo = true;
         zeraTabuleiro();
@@ -54,7 +53,6 @@ function vezDeJogar($numero)
         return $player2;
     }
 }
-
 //exibe o tabuleiro
 function exibirTabuleiro()
 {
@@ -85,75 +83,61 @@ function preencherTabela($localEscolhido, $player)
                 if ($tabuleiro[0][0] == '1') {
                     $tabuleiro[0][0] = $player;
                     $parar = true;
-                    break;
-                } else {
-                    break;
                 }
+                break;
             case 2:
                 if ($tabuleiro[0][1] == '2') {
                     $tabuleiro[0][1] = $player;
                     $parar = true;
-                    break;
-                } else {
-                    break;
                 }
+                break;
             case 3:
                 if ($tabuleiro[0][2] == '3') {
                     $tabuleiro[0][2] = $player;
                     $parar = true;
-                    break;
-                } else {
-                    break;
                 }
+                break;
             case 4:
                 if ($tabuleiro[1][0] == '4') {
                     $tabuleiro[1][0] = $player;
                     $parar = true;
-                    break;
-                } else {
-                    break;
                 }
+                break;
             case 5:
                 if ($tabuleiro[1][1] == '5') {
                     $tabuleiro[1][1] = $player;
                     $parar = true;
-                    break;
-                } else {
-                    break;
                 }
+                break;
             case 6:
                 if ($tabuleiro[1][2] == '6') {
                     $tabuleiro[1][2] = $player;
                     $parar = true;
-                    break;
-                } else {
-                    break;
                 }
+                break;
             case 7:
                 if ($tabuleiro[2][0] == '7') {
                     $tabuleiro[2][0] = $player;
                     $parar = true;
-                    break;
-                } else {
-                    break;
                 }
+                break;
             case 8:
                 if ($tabuleiro[2][1] == '8') {
                     $tabuleiro[2][1] = $player;
                     $parar = true;
-                    break;
-                } else {
-                    break;
                 }
+                break;
             case 9:
                 if ($tabuleiro[2][2] == '9') {
                     $tabuleiro[2][2] = $player;
                     $parar = true;
-                    break;
-                } else {
-                    break;
                 }
+                break;
+            default:
+                echo vermelho . 'preencha um número valido';
+                break;
         }
+
         if ($parar == false) {
             echo vermelho . " $localEscolhido já foi escolhido" . padrao . "\n";
             exibirTabuleiro();
@@ -161,7 +145,7 @@ function preencherTabela($localEscolhido, $player)
         }
     } while ($parar == false);
 }
-//valida se algum dos jogadores ganhou o jogo com for e if obs. tentamos mudar a cor do vencedor mas não conseguimos 
+//valida se algum dos jogadores ganhou o jogo com for e if 
 function verificaGanhador($player)
 {
     $ganhou = false;
@@ -171,7 +155,6 @@ function verificaGanhador($player)
             for ($j = 0; $j <= 2; $j++) {
                 $tabuleiro[$i][$j] = corVencedor($player);
             }
-
             $ganhou = true;
         }
         if ($tabuleiro[0][$i] == $player  && $tabuleiro[1][$i] == $player  && $tabuleiro[2][$i] == $player) {
@@ -183,13 +166,14 @@ function verificaGanhador($player)
 
         if ($tabuleiro[0][0] == $player  && $tabuleiro[1][1] == $player  && $tabuleiro[2][2] == $player) {
             for ($j = 0; $j <= 2; $j++) {
-                if ($i == $j) {
-                    $tabuleiro[$i][$j] = corVencedor($player);
+                for ($h = 0; $h <= 2; $h++) {
+                    if ($j == $h) {
+                        $tabuleiro[$j][$h] = corVencedor($player);
+                    }
                 }
             }
             $ganhou = true;
         }
-
         if ($tabuleiro[0][2] == $player  && $tabuleiro[1][1] == $player  && $tabuleiro[2][0] == $player) {
             $tabuleiro[0][2] = corVencedor($player);
             $tabuleiro[1][1] = corVencedor($player);
@@ -200,10 +184,11 @@ function verificaGanhador($player)
     return $ganhou;
 }
 
-function corVencedor($player){
-    if($player == amarelo . 'O'){
+function corVencedor($player)
+{
+    if ($player == amarelo . 'O') {
         return vermelho . "O";
-    }else{
+    } else {
         return vermelho . "X";
     }
 }
@@ -216,7 +201,7 @@ do {
         preencherTabela(readline(vezDeJogar($i) . padrao . " em qual linha deseja jogar: "), vezDeJogar($i));
         if ($i >= 4) {
             if (verificaGanhador(vezDeJogar($i)) == true) {
-                echo 'Parabéns jogador ' . vezDeJogar($i) . " você ganhou o jogo" . padrao . "\n";
+                echo 'Parabéns jogador ' . vezDeJogar($i) . padrao . " você ganhou o jogo" . padrao . "\n";
                 exibirTabuleiro();
                 break;
             } elseif ($i == 8) {
