@@ -5,6 +5,8 @@
 
 $nome = ucwords(readline('Digite um nome '));
 
-echo "$nome";
+if(is_numeric($nome) == true){
+    echo "é";
+}
 
 ?>

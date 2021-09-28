@@ -117,7 +117,7 @@ function imprimeImpar()
                 $soma += $impars[$i];
             }
         }
-        echo padrao . "A média dos números Impares é: " . padrao . $soma / count($impars) . vermelho . "\n";
+        echo padrao . "A média dos números Impares é: " . vermelho . $soma / count($impars) . padrao . "\n";
     }
 }
 
@@ -154,10 +154,15 @@ function sair($validacao)
     }
 }
 
-do {
-    recebeNumeros();
-    separaNum();
-    imprimePar();
-    imprimeImpar();
-    sair(readline(roxo . "Deseja Sair: S/N: " . padrao));
-} while ($sair == false);
+function programa(){
+    global $sair;
+    do {
+        recebeNumeros();
+        separaNum();
+        imprimePar();
+        imprimeImpar();
+        sair(readline(roxo . "Deseja Sair: S/N: " . padrao));
+    } while ($sair == false);
+}
+
+programa();
