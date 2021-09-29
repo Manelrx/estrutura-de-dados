@@ -62,7 +62,7 @@ function recebe_procuraAlunos($recebe, $nome)
         for ($j = 0; $j < 3; $j++) {
             for ($k = 0; $k < 3; $k++) {
                 if ($recebe == true) {
-                    $salas[$i][$j][$k] = validaNome(ucwords(strtolower(readline("Digite o nome do " . verde . $contaAlunos . "°" . padrao . " aluno da " . roxo . $i + 1 . "ª" . padrao . " sala:"))));
+                    $salas[$i][$j][$k] = validaNome(readline("Digite o nome do " . verde . $contaAlunos . "°" . padrao . " aluno da " . roxo . $i + 1 . "ª" . padrao . " sala:"));
                     $contaAlunos == 9 ? $contaAlunos = 1 : $contaAlunos++;
                 } else {
                     if ($salas[$i][$j][$k] == $nome) {

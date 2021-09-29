@@ -78,7 +78,7 @@ function preencherTabela($localEscolhido, $player)
     $parar = false;
     do {
         global $tabuleiro;
-        switch ($localEscolhido) {
+       /*  switch ($localEscolhido) {
             case 1:
                 if ($tabuleiro[0][0] == '1') {
                     $tabuleiro[0][0] = $player;
@@ -135,8 +135,16 @@ function preencherTabela($localEscolhido, $player)
                 break;
             default:
                 echo vermelho . 'preencha um número valido';
-                break;
+                break; */
+        for($i = 0; $i <3; $i++){
+            for($j = 0; $j < 3; $j++){
+                if ($tabuleiro[$i][$j] == $localEscolhido){
+                    
+                }
+
+            }
         }
+        
 
         if ($parar == false) {
             echo vermelho . " $localEscolhido já foi escolhido" . padrao . "\n";
