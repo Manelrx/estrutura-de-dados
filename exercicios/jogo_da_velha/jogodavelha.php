@@ -6,7 +6,6 @@
     define("roxo", "\033[0;35m");
     define("padrao", "\033[0m");
 }
-//declaração de variaveis
 $player1;
 $player2;
 $continuarJogo;
@@ -42,16 +41,12 @@ function continuar()
         $continuarJogo = false;
     }
 }
-//verifica de quem é a vez de jogar, se aproveitando do for do programa
+//verifica de quem é a vez de jogar
 function vezDeJogar($numero)
 {
     global $player1;
     global $player2;
-    if (($numero % 2) == 0) {
-        return $player1;
-    } else {
-        return $player2;
-    }
+    return $numero % 2 == 0 ? $player1 :  $player2;
 }
 //exibe o tabuleiro
 function exibirTabuleiro()
@@ -78,7 +73,7 @@ function preencherTabela($localEscolhido, $player)
     $parar = false;
     do {
         global $tabuleiro;
-       /*  switch ($localEscolhido) {
+        switch ($localEscolhido) {
             case 1:
                 if ($tabuleiro[0][0] == '1') {
                     $tabuleiro[0][0] = $player;
@@ -134,18 +129,9 @@ function preencherTabela($localEscolhido, $player)
                 }
                 break;
             default:
-                echo vermelho . 'preencha um número valido';
-                break; */
-        for($i = 0; $i <3; $i++){
-            for($j = 0; $j < 3; $j++){
-                if ($tabuleiro[$i][$j] == $localEscolhido){
-                    
-                }
-
-            }
+                echo vermelho . "preencha um número valido \n";
+                break;
         }
-        
-
         if ($parar == false) {
             echo vermelho . " $localEscolhido já foi escolhido" . padrao . "\n";
             exibirTabuleiro();
@@ -153,7 +139,7 @@ function preencherTabela($localEscolhido, $player)
         }
     } while ($parar == false);
 }
-//valida se algum dos jogadores ganhou o jogo com for e if 
+
 function verificaGanhador($player)
 {
     $ganhou = false;
@@ -200,7 +186,6 @@ function corVencedor($player)
         return vermelho . "X";
     }
 }
-
 //programa
 do {
     jogadores(readline("Deseja ser X ou O: "));

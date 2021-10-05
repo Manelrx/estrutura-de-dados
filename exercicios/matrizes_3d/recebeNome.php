@@ -51,6 +51,13 @@ $salas = [
     ]
 ];
 
+function CriaArray(){
+    global $guardaIndice1;
+    global $guardaIndice2;
+    $guardaIndice1 = array();
+    $guardaIndice2 = array();
+}
+
 function recebe_procuraAlunos($recebe, $nome)
 {
     $contaAlunos = 1;
@@ -69,7 +76,6 @@ function recebe_procuraAlunos($recebe, $nome)
                         $salas[$i][$j][$k] = amarelo . $nome;
                         $i == 0 ? array_push($guardaIndice1, "[$i][$j][$k]") : array_push($guardaIndice2, "[$i][$j][$k]");
                     }
-                    
                 }
             }
         }
@@ -86,19 +92,20 @@ function validaNome($nome)
             } else {
                 echo vermelho . "Não pode ser vazio. \n" . padrao;
             }
-            $nome = ucwords(strtolower(readline("Digite novamente: ")));
+            $nome = readline("Digite novamente: ");
         } else {
-            $nome = ucwords(strtolower($nome));
-            return $nome;
+            return ucwords(strtolower($nome));
             $validado = true;
         }
-    }while ($validado == false);
+    } while ($validado == false);
 }
 
 function informaIndices($indice, $i)
 {
+    global $guardaIndice1;
+    global $guardaIndice2;
     global $nomeProcurado;
-    if (count($indice) > 0) {
+    if (count($indice) != null) {
         echo roxo . "$nomeProcurado foi encontrado " . count($indice) . " vezes na sala $i no indice: \n ";
         for ($i = 0; $i < count($indice); $i++) {
             echo amarelo . $indice[$i] . "\n";
@@ -125,6 +132,7 @@ function recebeNome()
     global $guardaIndice2;
     recebe_procuraAlunos(true, '');
     do {
+        echo azul . "Escolha uma opção: \n" .  padrao;
         echo verde . "1 " . padrao . "- Visualizar as salas \n";
         echo verde . "2 " . padrao . "- Pesquisar um aluno \n";
         echo verde . "3 " . padrao . "- Preencher uma nova sala \n";
@@ -135,9 +143,10 @@ function recebeNome()
                 imprimeSalas();
                 break;
             case 2:
-                recebe_procuraAlunos(false, $nomeProcurado = validaNome(ucwords(strtolower(readline(verde . "Digite o nome que deseja pesquisar: " . padrao)))));
+                recebe_procuraAlunos(false, $nomeProcurado = validaNome(readline(verde . "Digite o nome que deseja pesquisar: " . padrao)));
                 informaIndices($guardaIndice1, 1);
                 informaIndices($guardaIndice2, 2);
+                CriaArray();
                 break;
             case 3:
                 recebe_procuraAlunos(true, '');
