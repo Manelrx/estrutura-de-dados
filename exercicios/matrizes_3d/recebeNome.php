@@ -122,6 +122,7 @@ function imprimeSalas()
     echo $salas[0][0][0] . padrao . ' | ' . $salas[0][0][1] . padrao . ' | ' . $salas[0][0][2] . $espaco . $salas[1][0][0] . padrao . ' | ' . $salas[1][0][1] . padrao . ' | ' . $salas[1][0][2] . padrao . "\n";
     echo $salas[0][1][0] . padrao . ' | ' . $salas[0][1][1] . padrao . ' | ' . $salas[0][1][2] . $espaco . $salas[1][1][0] . padrao . ' | ' . $salas[1][1][1] . padrao . ' | ' . $salas[1][1][2] . padrao . "\n";
     echo $salas[0][2][0] . padrao . ' | ' . $salas[0][2][1] . padrao . ' | ' . $salas[0][2][2] . $espaco . $salas[1][2][0] . padrao . ' | ' . $salas[1][2][1] . padrao . ' | ' . $salas[1][2][2] . padrao . "\n";
+    popen('cls','w');
 }
 
 function recebeNome()
