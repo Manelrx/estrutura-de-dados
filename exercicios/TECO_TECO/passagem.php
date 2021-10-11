@@ -18,12 +18,12 @@ Por exemplo Joao Silva Soares, resultaria em SOARES/Joao */
 $passageiro;
 $parar = false;
 $acent;
-$passageiros = 0;
+$qntPassageiros = 0;
 $acentos = [
-    ['x', ' ', ' ', ' '],
-    ['x', ' ', ' ', ' '],
     [' ', ' ', ' ', ' '],
-    [' ', ' ', 'X', ' '],
+    [' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' '],
@@ -45,9 +45,10 @@ function tratarString($nome)
     $passageiro = strtoupper($nomeCompleto[count($nomeCompleto) - 1]) . "/" . ucwords(strtolower($nomeCompleto[0]));
 }
 
-function escreve()
+function tela()
 {
     global $acentos;
+
     $tela = <<< EOD
 ----------------------------------------------------------------------------------   
                         ______
@@ -62,18 +63,16 @@ function escreve()
 ---------------------------------------------------------------------------------                        
                                  A    B           C     D\n
 EOD;
-echo $tela;
+    echo $tela;
     for ($i = 0; $i < 15; $i++) {
-        if($i > 8){
+        if ($i > 8) {
             echo "                            " . $i + 1 . "  [{$acentos[$i][0]}]  [{$acentos[$i][1]}]         [{$acentos[$i][2]}]   [{$acentos[$i][3]}]\n";
-        }else{
+        } else {
             echo "                            " . $i + 1 . "   [{$acentos[$i][0]}]  [{$acentos[$i][1]}]         [{$acentos[$i][2]}]   [{$acentos[$i][3]}]\n";
         }
     }
+    echo "--------------------------------------------------------------------------------\n ";
 }
-
-echo "--------------------------------------------------------------------------------\n ";
-
 
 function validaAcento($escolha)
 {
@@ -81,16 +80,16 @@ function validaAcento($escolha)
     $stop = false;
     do {
         $acento = str_split($escolha);
-        count($acento) > 1 ? $linha = $acento[1] . $acento[2] - 1 : $linha = $acento[1] - 1;
+        count($acento) > 2 ? $linha = ($acento[1] . $acento[2]) - 1 : $linha = $acento[1] - 1;
         if (($acento[0] == 'A' || $acento[0] == 'B' || $acento[0] == 'C' || $acento[0] == 'D') && $linha < 15) {
             if ($acento[0] == 'A') {
-                $coluna = 1;
+                $coluna = 0;
             } elseif ($acento[0] == 'B') {
-                $coluna = 2;
+                $coluna = 1;
             } elseif ($acento[0] == 'C') {
-                $coluna = 3;
+                $coluna = 2;
             } else {
-                $coluna = 4;
+                $coluna = 3;
             }
             $acent = $escolha;
             verifica_ePreencheAcento($linha, $coluna);
@@ -98,7 +97,7 @@ function validaAcento($escolha)
         }
         if (count($acento) > 3 || $stop == false) {
             echo "\nO acento escolhido não existe \n";
-            $escolha = strtoupper(readline("Digite novamente: "));
+            $escolha = strtoupper(readline("EX: A10   Digite novamente: "));
         }
     } while ($stop == false);
 }
@@ -106,13 +105,13 @@ function validaAcento($escolha)
 function verifica_ePreencheAcento($linha, $coluna)
 {
     global $acentos;
-    global $passageiros;
+    global $qntPassageiros;
     if ($acentos[$linha][$coluna] == " ") {
         $acentos[$linha][$coluna] = "X";
-        $passageiros++;
+        $qntPassageiros++;
         confirmaAcento();
     } else {
-        echo "Infelizmente esse acento já está reservado";
+        echo "Infelizmente esse acento já está reservado\n";
         validaAcento(strtoupper(readline("Escolha outro acento: ")));
     }
 }
@@ -121,7 +120,9 @@ function confirmaAcento()
 {
     global $acent;
     global $passageiro;
+    popen('cls', 'w');
     echo <<< CONFIRMA
+    --------------------------------------------------------------------------------\n
                           ----------------------
                               T E C O   T E C O
                               T  I  C  K  E  T
@@ -141,17 +142,20 @@ function parar($validacao)
 {
     global $parar;
     if ($validacao == 'S') {
+        echo ('Obrigado por escolher a TECO - TECO AIRLINES!');
         $parar = true;
     } else {
         $parar = false;
     }
 }
-
-/*  do{
-    echo $tela;
-    tratarString(readline("Digite seu nome: "));
-    validaAcento(strtoupper(readline("Escolha um dos acentos acima: ")));
-    parar(strtoupper(readline("Deseja parar: (S/N)")));
-}while($parar == false); */
-
-echo escreve();
+ do{
+    tela();
+    tratarString(readline("Informe o nome Completo: "));
+    validaAcento(strtoupper(readline("Informe a poltrona desejada: ")));
+    if($qntPassageiros > 30){
+        echo "STATUS DO VOO: CONFIRMADO!!";
+        parar(readline("\nDeseja iniciar o voo: (S/N)"));
+    }else{
+        echo "STATUS DO VOO: AGUARDANDO CONFIRMAÇÃO!\n";
+    }
+} while ($parar == false);
