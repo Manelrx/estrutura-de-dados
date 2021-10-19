@@ -1,4 +1,6 @@
 <?php
+include ('Lista.php');
+
 define("azul", "\033[34m");
 define("vermelho", "\033[31m");
 define("verde", "\033[32m");
@@ -13,7 +15,6 @@ Por exemplo Joao Silva Soares, resultaria em SOARES/Joao */
 // popen('cls','w'); APAGAR O PROMPT DE COMANDO
 
 // $nomeCompleto = readline(verde . "Digite seu nome Completo: " . padrao);
-
 
 $passageiro;
 $parar = false;
@@ -97,7 +98,7 @@ function validaAcento($escolha)
         }
         if (count($acento) > 3 || $stop == false) {
             echo "\nO acento escolhido não existe \n";
-            $escolha = strtoupper(readline("EX: A10   Digite novamente: "));
+            $escolha = strtoupper(readline(VERMELHO . "EX: A10   Digite novamente: " . PADRAO));
         }
     } while ($stop == false);
 }
@@ -107,12 +108,12 @@ function verifica_ePreencheAcento($linha, $coluna)
     global $acentos;
     global $qntPassageiros;
     if ($acentos[$linha][$coluna] == " ") {
-        $acentos[$linha][$coluna] = "X";
+        $acentos[$linha][$coluna] = VERDE . "X" . PADRAO;
         $qntPassageiros++;
         confirmaAcento();
     } else {
-        echo "Infelizmente esse acento já está reservado\n";
-        validaAcento(strtoupper(readline("Escolha outro acento: ")));
+        echo VERMELHO . "Infelizmente esse acento já está reservado\n" . PADRAO;
+        validaAcento(strtoupper(readline(AZUL . "Escolha outro acento: " . PADRAO)));
     }
 }
 
@@ -120,8 +121,9 @@ function confirmaAcento()
 {
     global $acent;
     global $passageiro;
+
     popen('cls', 'w');
-    echo <<< CONFIRMA
+    echo VERDE . <<< CONFIRMA
     --------------------------------------------------------------------------------\n
                           ----------------------
                               T E C O   T E C O
@@ -133,29 +135,32 @@ function confirmaAcento()
                         
                             PASSAGEIRO: $passageiro
                             ACENTO: $acent
-                              BOA VIAGEM!!!
+                            BOA VIAGEM!!!
     --------------------------------------------------------------------------------\n
-    CONFIRMA;
+    CONFIRMA . PADRAO;
+    recebeMat_Nome($passageiro, $acent);
 }
 
 function parar($validacao)
 {
     global $parar;
     if ($validacao == 'S') {
-        echo ('Obrigado por escolher a TECO - TECO AIRLINES!');
+        escreveLista();
+        echo (AZUL .'Obrigado por escolher a TECO - TECO AIRLINES!' . PADRAO);
         $parar = true;
     } else {
         $parar = false;
     }
 }
+
  do{
     tela();
-    tratarString(readline("Informe o nome Completo: "));
-    validaAcento(strtoupper(readline("Informe a poltrona desejada: ")));
-    if($qntPassageiros > 30){
-        echo "STATUS DO VOO: CONFIRMADO!!";
-        parar(readline("\nDeseja iniciar o voo: (S/N)"));
+    tratarString(readline(AZUL . "Informe o nome Completo: " . PADRAO));
+    validaAcento(strtoupper(readline(AZUL . "Informe a poltrona desejada: " . PADRAO)));
+    if($qntPassageiros > 1){
+        echo VERDE . "STATUS DO VOO: CONFIRMADO!!" . PADRAO;
+        parar(strtoupper(readline("\nDeseja iniciar o voo: (S/N)")));
     }else{
-        echo "STATUS DO VOO: AGUARDANDO CONFIRMAÇÃO!\n";
+        echo AMARELO . "STATUS DO VOO: AGUARDANDO CONFIRMAÇÃO!\n" . PADRAO;
     }
 } while ($parar == false);
